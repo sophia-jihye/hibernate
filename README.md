@@ -7,11 +7,10 @@
 	2. Does not require to declare specific query(Ex. `select book_nm from book;`) in .xml file
 		- Just declare the table name and columns
 		- More intuitive to view the one object as a data of one row
-		- ex. 
-			Insert = create object, send the object as a parameter and call commit API
-			Select = send pk as a parameter and call get API
-			Update = modify the property of object, send the object as a parameter and call update API
-			Delete = send the object as a parameter and call delete API
+		- ex.	Insert = create object, send the object as a parameter and call commit API
+				Select = send pk as a parameter and call get API
+				Update = modify the property of object, send the object as a parameter and call update API
+				Delete = send the object as a parameter and call delete API
 		- If you want to handle with somewhat complicated query (Ex. paging query), mybatis would be more better to use.
 
 #### Steps to configure multiple database
