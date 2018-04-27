@@ -1,6 +1,7 @@
 package sophia.hibernate.manager;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -24,7 +25,7 @@ public class SessionManager {
 	private SessionFactory sessionFactory;
 	private ServiceRegistry serviceRegistry;
 
-	public SessionFactory getSessionFactory() {
+	private SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			try {
 				Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
@@ -38,6 +39,72 @@ public class SessionManager {
 			}
 		}
 		return sessionFactory;
+	}
+
+	public void closeSessionFactory() {
+		if (sessionFactory != null) {
+			sessionFactory.close();
+		}
+	}
+
+	public Object select(Class<?> targetClass, String primaryKeyValue) {
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		Object output = session.get(targetClass, primaryKeyValue);
+
+		logger.debug("[sophia-hibernate] Select completed: {}", output);
+		logger.debug("--------------------");
+
+		session.close();
+		return output;
+	}
+
+	public Object select(Class<?> targetClass, Integer primaryKeyValue) {
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		Object output = session.get(targetClass, primaryKeyValue);
+
+		logger.debug("[sophia-hibernate] Select completed: {}", output);
+		logger.debug("--------------------");
+
+		session.close();
+		return output;
+	}
+
+	public void insert(Object obj) {
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(obj);
+		session.getTransaction().commit();
+
+		logger.debug("[sophia-hibernate] Insert completed");
+		logger.debug("--------------------");
+
+		session.close();
+	}
+
+	public void update(Object obj) {
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		session.update(obj);
+		session.getTransaction().commit();
+
+		logger.debug("[sophia-hibernate] Update completed");
+		logger.debug("--------------------");
+
+		session.close();
+	}
+
+	public void delete(Object obj) {
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		session.delete(obj);
+		session.getTransaction().commit();
+
+		logger.debug("[sophia-hibernate] Delete completed");
+		logger.debug("--------------------");
+
+		session.close();
 	}
 
 }

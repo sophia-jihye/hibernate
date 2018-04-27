@@ -21,4 +21,9 @@ public class Book {
 		this.bookPrice = bookPrice;
 	}
 
+	@Override
+	public String toString() {
+		return "Book [bookNm=" + bookNm + ", bookPrice=" + bookPrice + "]";
+	}
+
 }
