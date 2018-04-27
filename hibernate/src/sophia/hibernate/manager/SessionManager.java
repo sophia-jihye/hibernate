@@ -30,8 +30,10 @@ public class SessionManager {
 		if (sessionFactory == null) {
 			try {
 				Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-				serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-						.buildServiceRegistry();
+				if (serviceRegistry == null) {
+					serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
+							.buildServiceRegistry();
+				}
 
 				sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
@@ -46,8 +48,10 @@ public class SessionManager {
 		if (sessionFactory2 == null) {
 			try {
 				Configuration configuration = new Configuration().configure("/hibernate.cfg2.xml");
-				serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-						.buildServiceRegistry();
+				if (serviceRegistry == null) {
+					serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
+							.buildServiceRegistry();
+				}
 
 				sessionFactory2 = configuration.buildSessionFactory(serviceRegistry);
 
