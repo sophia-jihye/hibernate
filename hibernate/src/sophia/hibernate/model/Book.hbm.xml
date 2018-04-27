@@ -15,5 +15,5 @@
     <property name="bookPrice"></property>  
             
   </class>  
-            
+  
  </hibernate-mapping>
