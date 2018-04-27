@@ -1,4 +1,4 @@
-package sophia.hibernate;
+package sophia.hibernate.model;
 
 public class Book {
 

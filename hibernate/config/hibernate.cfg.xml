@@ -7,12 +7,12 @@
 		<property name="hibernate.connection.password">bxq</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@111.111.111.111:22222:parkorcl</property>
 		<property name="hibernate.connection.username">jihye</property>
-		<property name="hibernate.default_schema">password</property>
+		<property name="hibernate.default_schema">jihye</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">create</property>
 
-		<mapping resource="sophia/hibernate/Book.hbm.xml"/>
+		<mapping resource="sophia/hibernate/model/Book.hbm.xml"/>
 
 	</session-factory>
 </hibernate-configuration>

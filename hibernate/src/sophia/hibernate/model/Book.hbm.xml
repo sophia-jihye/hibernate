@@ -4,7 +4,7 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
  <hibernate-mapping>  
-  <class name="sophia.hibernate.Book" table="book">  
+  <class name="sophia.hibernate.model.Book" table="book">  
 
 	<!-- primary key -->
     <id name="bookNm">  
