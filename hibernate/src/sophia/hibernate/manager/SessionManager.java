@@ -23,9 +23,10 @@ public class SessionManager {
 	}
 
 	private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory2;
 	private ServiceRegistry serviceRegistry;
 
-	private SessionFactory getSessionFactory() {
+	public SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			try {
 				Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
@@ -41,14 +42,33 @@ public class SessionManager {
 		return sessionFactory;
 	}
 
+	public SessionFactory getSessionFactory2() {
+		if (sessionFactory2 == null) {
+			try {
+				Configuration configuration = new Configuration().configure("/hibernate.cfg2.xml");
+				serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
+						.buildServiceRegistry();
+
+				sessionFactory2 = configuration.buildSessionFactory(serviceRegistry);
+
+			} catch (HibernateException e) {
+				logger.error("[sophia-hibernate] HibernateException occurred while getting sessionFactory2", e);
+			}
+		}
+		return sessionFactory2;
+	}
+
 	public void closeSessionFactory() {
 		if (sessionFactory != null) {
 			sessionFactory.close();
 		}
+		if (sessionFactory2 != null) {
+			sessionFactory2.close();
+		}
 	}
 
-	public Object select(Class<?> targetClass, String primaryKeyValue) {
-		Session session = getSessionFactory().openSession();
+	public Object select(SessionFactory sessionFactory, Class<?> targetClass, String primaryKeyValue) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Object output = session.get(targetClass, primaryKeyValue);
 
@@ -59,8 +79,8 @@ public class SessionManager {
 		return output;
 	}
 
-	public Object select(Class<?> targetClass, Integer primaryKeyValue) {
-		Session session = getSessionFactory().openSession();
+	public Object select(SessionFactory sessionFactory, Class<?> targetClass, Integer primaryKeyValue) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Object output = session.get(targetClass, primaryKeyValue);
 
@@ -71,8 +91,8 @@ public class SessionManager {
 		return output;
 	}
 
-	public void insert(Object obj) {
-		Session session = getSessionFactory().openSession();
+	public void insert(SessionFactory sessionFactory, Object obj) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(obj);
 		session.getTransaction().commit();
@@ -83,8 +103,8 @@ public class SessionManager {
 		session.close();
 	}
 
-	public void update(Object obj) {
-		Session session = getSessionFactory().openSession();
+	public void update(SessionFactory sessionFactory, Object obj) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.update(obj);
 		session.getTransaction().commit();
@@ -95,8 +115,8 @@ public class SessionManager {
 		session.close();
 	}
 
-	public void delete(Object obj) {
-		Session session = getSessionFactory().openSession();
+	public void delete(SessionFactory sessionFactory, Object obj) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.delete(obj);
 		session.getTransaction().commit();
