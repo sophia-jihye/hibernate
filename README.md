@@ -1,5 +1,5 @@
 # hibernate
-sample code for hibernate
+study note and sample code for hibernate
 
 #### Advantage of Hibernate 
 	1. Easy to use multiple database. 
@@ -13,5 +13,6 @@ sample code for hibernate
 		- Edit method named closeSessionFactory()
 	3. Call different sessionFactory in TestMain class
 		- You can open multiple SessionFactory
-		- To execute query, just send the sessionFactory as a parameter while calling the CRUD methods.
+		- Send the sessionFactory as the first parameter while calling the CRUD methods.
+	
 	
