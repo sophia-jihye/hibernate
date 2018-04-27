@@ -13,7 +13,7 @@ study note and sample code for hibernate
 				Delete = send the object as a parameter and call delete API
 		- If you want to handle with somewhat complicated query (Ex. paging query), mybatis would be more better to use.
 
-#### Steps to configure multiple database
+#### Steps to use multiple databases
 	1. Add configuration file under 'config' folder and set database information
 		- Refer to ./hibernate/config/hibernate.cfg.xml
 	2. In ./hibernate/src/sophia/hibernate/manager/SessionManager class, add or edit method that handles configuration file
