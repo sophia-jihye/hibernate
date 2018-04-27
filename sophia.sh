@@ -1,5 +1,4 @@
-git add ./src
-git add ./bin
+git add ./hibernate/src
 git commit -m "commit"
 git push
 

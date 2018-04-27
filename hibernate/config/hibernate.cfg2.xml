@@ -4,13 +4,13 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<property name="hibernate.connection.password">park</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@111.111.111.111:33333:parkorcl</property>
-		<property name="hibernate.connection.username">park</property>
-		<property name="hibernate.default_schema">park</property>
+		<property name="hibernate.connection.password">jihye</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@111.111.111.111:22222:parkpark</property>
+		<property name="hibernate.connection.username">jihye</property>
+		<property name="hibernate.default_schema">jihye</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
 
 		<mapping resource="sophia/hibernate/model/Book.hbm.xml"/>
 

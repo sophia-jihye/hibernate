@@ -14,7 +14,7 @@ public class TestMain {
 				.configure("C:\\DevelopTools\\Workspace\\git2\\hibernate\\hibernate\\config\\log4j-copier.properties");
 
 		Book book = new Book();
-		book.setBookNm("북네임!");
+		book.setBookNm("북네임");
 		book.setBookPrice("1000");
 
 		// sessionFactory OPEN
@@ -22,7 +22,7 @@ public class TestMain {
 		SessionFactory sessionFactory2 = SessionManager.instance().getSessionFactory2();
 
 		// insert
-		SessionManager.instance().insert(sessionFactory2, book);
+		SessionManager.instance().insert(sessionFactory, book);
 
 		// select
 		Book bookToUpdate = (Book) SessionManager.instance().select(sessionFactory2, Book.class, "북네임!");
