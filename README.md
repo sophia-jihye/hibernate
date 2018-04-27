@@ -1,5 +1,5 @@
 # hibernate
-study note and sample code for hibernate
+	> study note and sample code for hibernate
 
 #### Advantage of Hibernate 
 	1. Easy to use multiple database. 
