@@ -1,6 +1,9 @@
 package sophia.hibernate.manager;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,6 +11,8 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import sophia.hibernate.model.Book;
 
 public class SessionManager {
 
@@ -129,6 +134,25 @@ public class SessionManager {
 		logger.debug("--------------------");
 
 		session.close();
+	}
+
+	public List<Book> selectByQuery(SessionFactory sessionFactory, String hql) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery(hql);
+		List<Book> outputList = (List<Book>) query.list();
+
+		logger.debug("[sophia-hibernate] Select by query completed: {}", outputList);
+		logger.debug("--------------------");
+
+		// check
+		for (int i = 0; i < outputList.size(); i++) {
+			logger.debug("[sophia-hibernate] check: {}", outputList.get(i));
+		}
+
+		session.close();
+		return outputList;
 	}
 
 }

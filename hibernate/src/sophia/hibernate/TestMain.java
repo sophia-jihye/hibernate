@@ -1,7 +1,11 @@
 package sophia.hibernate;
 
+import java.util.List;
+
 import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sophia.hibernate.manager.SessionManager;
 import sophia.hibernate.model.Book;
@@ -14,7 +18,7 @@ public class TestMain {
 				.configure("C:\\DevelopTools\\Workspace\\git2\\hibernate\\hibernate\\config\\log4j-copier.properties");
 
 		Book book = new Book();
-		book.setBookNm("북네임");
+		book.setBookNm("북네임~");
 		book.setBookPrice("1000");
 
 		// sessionFactory OPEN
@@ -22,17 +26,25 @@ public class TestMain {
 		SessionFactory sessionFactory2 = SessionManager.instance().getSessionFactory2();
 
 		// insert
-		SessionManager.instance().insert(sessionFactory, book);
+		SessionManager.instance().insert(sessionFactory2, book);
 
 		// select
-		Book bookToUpdate = (Book) SessionManager.instance().select(sessionFactory2, Book.class, "북네임!");
+		Book bookToUpdate = (Book) SessionManager.instance().select(sessionFactory, Book.class, "북네임");
 
 		// update
 		bookToUpdate.setBookPrice("9999");
-		SessionManager.instance().update(sessionFactory2, bookToUpdate);
+		SessionManager.instance().update(sessionFactory, bookToUpdate);
 
 		// delete
-		SessionManager.instance().delete(sessionFactory, book);
+		SessionManager.instance().delete(sessionFactory2, book);
+
+		// select by query
+		// Table name under 'FROM' should be exactly the same name of the class
+		// under model package.
+		// Column name should be exactly the same name of the property in the
+		// class under model package.
+		String hql = "SELECT bookNm, bookPrice FROM Book ORDER BY bookPrice DESC";
+		List<Book> bookList = SessionManager.instance().selectByQuery(sessionFactory, hql);
 
 		// sessionFactory CLOSE
 		SessionManager.instance().closeSessionFactory();
