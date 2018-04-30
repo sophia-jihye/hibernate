@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import sophia.hibernate.manager.SessionManager;
 import sophia.hibernate.model.Book;
@@ -44,7 +42,11 @@ public class TestMain {
 		// Column name should be exactly the same name of the property in the
 		// class under model package.
 		String hql = "SELECT bookNm, bookPrice FROM Book ORDER BY bookPrice DESC";
-		List<Book> bookList = SessionManager.instance().selectByQuery(sessionFactory, hql);
+		List<Object> bookList = SessionManager.instance().selectByQuery(sessionFactory, Book.class, hql);
+
+		// 테이블 join
+		hql = "SELECT Book.bookNm, Book.bookPrice FROM Book, Book2 WHERE Book.bookNm = Book2.bookNm ORDER BY Book.bookPrice DESC";
+		List<Object> bookList2 = SessionManager.instance().selectByQuery(sessionFactory, Book.class, hql);
 
 		// sessionFactory CLOSE
 		SessionManager.instance().closeSessionFactory();

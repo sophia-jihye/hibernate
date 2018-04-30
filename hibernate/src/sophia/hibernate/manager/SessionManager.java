@@ -100,6 +100,25 @@ public class SessionManager {
 		return output;
 	}
 
+	public List<Object> selectByQuery(SessionFactory sessionFactory, Class<?> targetClass, String hql) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery(hql);
+		List<Object> outputList =query.list();
+
+		logger.debug("[sophia-hibernate] Select by query completed: {}", outputList);
+		logger.debug("--------------------");
+
+		// check
+		for (int i = 0; i < outputList.size(); i++) {
+			logger.debug("[sophia-hibernate] check: {}", outputList.get(i));
+		}
+
+		session.close();
+		return outputList;
+	}
+
 	public void insert(SessionFactory sessionFactory, Object obj) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -134,25 +153,6 @@ public class SessionManager {
 		logger.debug("--------------------");
 
 		session.close();
-	}
-
-	public List<Book> selectByQuery(SessionFactory sessionFactory, String hql) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		Query query = session.createQuery(hql);
-		List<Book> outputList = (List<Book>) query.list();
-
-		logger.debug("[sophia-hibernate] Select by query completed: {}", outputList);
-		logger.debug("--------------------");
-
-		// check
-		for (int i = 0; i < outputList.size(); i++) {
-			logger.debug("[sophia-hibernate] check: {}", outputList.get(i));
-		}
-
-		session.close();
-		return outputList;
 	}
 
 }
