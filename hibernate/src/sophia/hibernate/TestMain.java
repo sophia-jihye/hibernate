@@ -37,9 +37,9 @@ public class TestMain {
 		SessionManager.instance().delete(sessionFactory2, book);
 
 		// select by query
-		// Table name under 'FROM' should be exactly the same name of the class
+		// Table name under 'FROM' should be exactly the case-sensitive name of the class
 		// under model package.
-		// Column name should be exactly the same name of the property in the
+		// Column name should be exactly the case-sensitive name of the property in the
 		// class under model package.
 		String hql = "SELECT bookNm, bookPrice FROM Book ORDER BY bookPrice DESC";
 		List<Object> bookList = SessionManager.instance().selectByQuery(sessionFactory, Book.class, hql);
