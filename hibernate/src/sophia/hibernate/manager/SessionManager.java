@@ -12,8 +12,6 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sophia.hibernate.model.Book;
-
 public class SessionManager {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -105,15 +103,15 @@ public class SessionManager {
 		session.beginTransaction();
 
 		Query query = session.createQuery(hql);
-		List<Object> outputList =query.list();
-
-		logger.debug("[sophia-hibernate] Select by query completed: {}", outputList);
-		logger.debug("--------------------");
+		List<Object> outputList = query.list();
 
 		// check
 		for (int i = 0; i < outputList.size(); i++) {
 			logger.debug("[sophia-hibernate] check: {}", outputList.get(i));
 		}
+
+		logger.debug("[sophia-hibernate] Select by query completed: {}", outputList);
+		logger.debug("--------------------");
 
 		session.close();
 		return outputList;
