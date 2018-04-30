@@ -14,10 +14,10 @@ study note and sample code for hibernate
 			Delete = send the object as a parameter and call delete API
 		- If you want to handle with somewhat complicated query (Ex. paging query), mybatis would be more better to use.
 		[Please Refer to 'Things to consider when writing specific query ' as below.]
-	3. Sometimes it executes extra query which was not declared by user, to make sure that declared query is safe to execute.
-			- Ex. When execuing 'delete' process, hibernate program first executes 'select by PK' query and then executes 'delete' query.   
-			Hibernate: select book_.bookNm, book_.bookPrice as bookPrice3_ from book book_ where book_.bookNm=?
-			Hibernate: delete from book where bookNm=?
+	3. Sometimes it executes extra query which was not declared by user in order to make sure that declared query is safe to execute.
+		- Ex. When execuing 'delete' process, hibernate program first executes 'select by PK' query and then executes 'delete' query.   
+		Hibernate: select book_.bookNm, book_.bookPrice as bookPrice3_ from book book_ where book_.bookNm=?
+		Hibernate: delete from book where bookNm=?
 
 #### Steps to use multiple databases
 	1. Add configuration file under 'config' folder and set database information
