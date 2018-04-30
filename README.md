@@ -2,7 +2,7 @@
 study note and sample code for hibernate
 
 #### Features of Hibernate 
-	1. Easy to use multiple database
+	1. Easy to use multiple databases
 		- Just add another config file and load
 	2. Does not require to declare specific query(Ex. `select book_nm from book;`) in .xml file
 		- Just declare the table name and columns
