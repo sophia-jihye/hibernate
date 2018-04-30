@@ -45,7 +45,7 @@ public class TestMain {
 		List<Object> bookList = SessionManager.instance().selectByQuery(sessionFactory, Book.class, hql);
 
 		// 테이블 join
-		hql = "SELECT Book.bookNm, Book.bookPrice FROM Book, Book2 WHERE Book.bookNm = Book2.bookNm ORDER BY Book.bookPrice DESC";
+		hql = "SELECT book.bookNm, book.bookPrice FROM Book as book, Book2 as book2 WHERE book.bookNm = book2.bookNm AND book.bookNm LIKE '%북%' ORDER BY book.bookPrice DESC";
 		List<Object> bookList2 = SessionManager.instance().selectByQuery(sessionFactory, Book.class, hql);
 
 		// sessionFactory CLOSE
