@@ -2,19 +2,20 @@
 study note and sample code for hibernate
 
 #### Features of Hibernate 
-	1. Easy to use multiple databases
+	1. Very intuitive to implement Object-Oriented Programming.
+		- More intuitive to view the one object as a data of one row
+	2. Easy to use multiple databases
 		- Just add another config file and load
 		- [Please Refer to 'Steps to use multiple databases' as below.]
-	2. Does not require to declare specific query(Ex. `select book_nm from book;`) in .xml file
+	3. Does not require to declare specific query(Ex. `select book_nm from book;`) in .xml file
 		- Just declare the table name and columns
-		- More intuitive to view the one object as a data of one row
 		- ex.	Insert = create object, send the object as a parameter and call commit API
 			Select = send pk as a parameter and call get API
 			Update = modify the property of object, send the object as a parameter and call update API
 			Delete = send the object as a parameter and call delete API
 		- If you want to handle with somewhat complicated query (Ex. paging query), mybatis would be more better to use.
 		[Please Refer to 'Things to consider when writing specific query ' as below.]
-	3. Sometimes it executes extra query which was not declared by user in order to make sure that declared query is safe to execute.
+	4. Sometimes it executes extra query which was not declared by user in order to make sure that declared query is safe to execute.
 		- Ex. When execuing 'delete' process, hibernate program first executes 'select by PK' query and then executes 'delete' query.   
 		Sample log:	Hibernate: select book_.bookNm, book_.bookPrice as bookPrice3_ from book book_ where book_.bookNm=?
 				Hibernate: delete from book where bookNm=?
