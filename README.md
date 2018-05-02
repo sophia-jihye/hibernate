@@ -16,8 +16,8 @@ study note and sample code for hibernate
 		[Please Refer to 'Things to consider when writing specific query ' as below.]
 	3. Sometimes it executes extra query which was not declared by user in order to make sure that declared query is safe to execute.
 		- Ex. When execuing 'delete' process, hibernate program first executes 'select by PK' query and then executes 'delete' query.   
-		Hibernate: select book_.bookNm, book_.bookPrice as bookPrice3_ from book book_ where book_.bookNm=?
-		Hibernate: delete from book where bookNm=?
+		Sample log:	Hibernate: select book_.bookNm, book_.bookPrice as bookPrice3_ from book book_ where book_.bookNm=?
+				Hibernate: delete from book where bookNm=?
 
 #### Steps to use multiple databases
 	1. Add configuration file under 'config' folder and set database information
@@ -30,7 +30,7 @@ study note and sample code for hibernate
 		- Send the sessionFactory as the first parameter while calling the CRUD methods
 	
 #### Things to consider when writing specific query 
-	1. Every related table should be made as a object (Ex.sophia/model/Book.class)
+	1. Every related table should be made as an object (Ex.sophia/model/Book.class)
 	2. When using JOIN query, alias must be used.
 	3. Table name under 'FROM' should be exactly the case-sensitive name of the class under model package.   
 	Column name should be exactly the case-sensitive name of the property in the class under model package.
